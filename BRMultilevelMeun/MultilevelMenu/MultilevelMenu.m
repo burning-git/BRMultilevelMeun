@@ -78,7 +78,7 @@
          右边的视图
          */
         UICollectionViewFlowLayout *flowLayout=[[UICollectionViewFlowLayout alloc] init];
-        flowLayout.minimumInteritemSpacing=10.f;//左右间隔
+        flowLayout.minimumInteritemSpacing=0.f;//左右间隔
         flowLayout.minimumLineSpacing=0.f;
         float leftMargin =0;
         self.rightCollection=[[UICollectionView alloc] initWithFrame:CGRectMake(kLeftWidth+leftMargin,0,kScreenWidth-kLeftWidth-leftMargin*2,frame.size.height) collectionViewLayout:flowLayout];
