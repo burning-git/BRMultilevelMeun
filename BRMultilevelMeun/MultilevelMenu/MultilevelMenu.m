@@ -96,9 +96,6 @@
         
         [self addSubview:self.rightCollection];
         
-        if (self.allData.count>0) {
-              [self.leftTablew selectRowAtIndexPath:[NSIndexPath indexPathForRow:self.selectIndex inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
-        }
       
         self.isReturnLastOffset=YES;
         
@@ -110,6 +107,27 @@
     return self;
 }
 
+-(void)setNeedToScorllerIndex:(NSInteger)needToScorllerIndex{
+    if (needToScorllerIndex>0) {
+        
+        /**
+         *  滑动到 指定行数
+         */
+        [self.leftTablew selectRowAtIndexPath:[NSIndexPath indexPathForRow:needToScorllerIndex inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
+        
+        
+        MultilevelTableViewCell * cell=(MultilevelTableViewCell*)[self.leftTablew cellForRowAtIndexPath:[NSIndexPath indexPathForRow:needToScorllerIndex inSection:0]];
+        UILabel * line=(UILabel*)[cell viewWithTag:100];
+        line.backgroundColor=cell.backgroundColor;
+        cell.titile.textColor=self.leftSelectColor;
+        cell.backgroundColor=self.leftSelectBgColor;
+        _selectIndex=needToScorllerIndex;
+        
+        [self.rightCollection reloadData];
+
+    }
+    _needToScorllerIndex=needToScorllerIndex;
+}
 -(void)setLeftBgColor:(UIColor *)leftBgColor{
     _leftBgColor=leftBgColor;
     self.leftTablew.backgroundColor=leftBgColor;

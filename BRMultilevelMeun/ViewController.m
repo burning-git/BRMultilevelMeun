@@ -28,7 +28,7 @@
     /**
      *  构建需要数据 2层或者3层数据 (ps 2层也当作3层来处理)
      */
-    NSInteger countMax=10;
+    NSInteger countMax=20;
     for (int i=0; i<countMax; i++) {
         
         rightMeun * meun=[[rightMeun alloc] init];
@@ -64,12 +64,18 @@
         [lis addObject:meun];
     }
     
-    
+    /**
+     默认是 选中第一行
+     
+     :returns: <#return value description#>
+     */
     MultilevelMenu * view=[[MultilevelMenu alloc] initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight-64) WithData:lis withSelectIndex:^(NSInteger left, NSInteger right,rightMeun* info) {
         
         NSLog(@"点击的 菜单%@",info.meunName);
     }];
     
+    
+    view.needToScorllerIndex=10;
 //    view.leftSelectColor=[UIColor greenColor];
   //  view.leftSelectBgColor=[UIColor redColor];
     view.isRecordLastScroll=YES;

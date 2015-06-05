@@ -23,6 +23,10 @@
 @property(assign,nonatomic,readonly) NSInteger selectIndex;
 
 /**
+ *  为了 不修改原来的，因此增加了一个属性，选中指定 行数
+ */
+@property(assign,nonatomic) NSInteger needToScorllerIndex;
+/**
  *  颜色属性配置
  */
 
