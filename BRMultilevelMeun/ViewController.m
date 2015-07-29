@@ -21,7 +21,6 @@
     [super viewDidLoad];
     
     
-    
     NSMutableArray * lis=[NSMutableArray arrayWithCapacity:0];
     
    
@@ -65,6 +64,11 @@
     }
     
     /**
+     *  适配 ios 7 和ios 8 的 坐标系问题
+     */
+    self.automaticallyAdjustsScrollViewInsets=NO;
+
+    /**
      默认是 选中第一行
      
      :returns: <#return value description#>
@@ -75,7 +79,7 @@
     }];
     
     
-    view.needToScorllerIndex=10;
+    view.needToScorllerIndex=1;
 //    view.leftSelectColor=[UIColor greenColor];
   //  view.leftSelectBgColor=[UIColor redColor];
     view.isRecordLastScroll=YES;
