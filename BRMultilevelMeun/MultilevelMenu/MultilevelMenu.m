@@ -36,10 +36,10 @@
     // Drawing code
 }
 */
--(id)initWithFrame:(CGRect)frame WithData:(NSArray *)data withSelectIndex:(void (^)(NSInteger, NSInteger, id))selectIndex
+-(instancetype)initWithFrame:(CGRect)frame WithData:(NSArray *)data withSelectIndex:(void (^)(NSInteger, NSInteger, id))selectIndex
 {
-    
-    if (self  == [super initWithFrame:frame]) {
+    self=[super initWithFrame:frame];
+    if (!self) {
         if (data.count==0) {
             return nil;
         }

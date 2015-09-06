@@ -63,7 +63,7 @@
  */
 @property(strong,nonatomic) UIColor * leftSeparatorColor;
 
--(id)initWithFrame:(CGRect)frame WithData:(NSArray*)data withSelectIndex:(void(^)(NSInteger left,NSInteger right,id info))selectIndex;
+-(instancetype)initWithFrame:(CGRect)frame WithData:(NSArray*)data withSelectIndex:(void(^)(NSInteger left,NSInteger right,id info))selectIndex;
 
 @end
 
