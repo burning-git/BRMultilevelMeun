@@ -17,8 +17,14 @@
 
 @property(copy,nonatomic,readonly) id block;
 
-
+/**
+ *  是否 记录滑动位置
+ */
 @property(assign,nonatomic) BOOL isRecordLastScroll;
+/**
+ *   记录滑动位置 是否需要 动画
+ */
+@property(assign,nonatomic) BOOL isRecordLastScrollAnimated;
 
 @property(assign,nonatomic,readonly) NSInteger selectIndex;
 

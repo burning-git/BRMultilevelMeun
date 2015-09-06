@@ -79,14 +79,16 @@
     }];
     
     
-    view.needToScorllerIndex=1;
-//    view.leftSelectColor=[UIColor greenColor];
-  //  view.leftSelectBgColor=[UIColor redColor];
+    view.needToScorllerIndex=6;
+
     view.isRecordLastScroll=YES;
     [self.view addSubview:view];
     // Do any additional setup after loading the view, typically from a nib.
 }
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

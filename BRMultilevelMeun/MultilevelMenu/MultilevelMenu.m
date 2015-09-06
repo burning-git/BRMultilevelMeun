@@ -10,6 +10,8 @@
 #import "MultilevelTableViewCell.h"
 #import "MultilevelCollectionViewCell.h"
 #import "UIImageView+WebCache.h"
+
+#define kCellRightLineTag 100
 #define kImageDefaultName @"tempShop"
 #define kMultilevelCollectionViewCell @"MultilevelCollectionViewCell"
 #define kMultilevelCollectionHeader   @"CollectionHeader"//CollectionHeader
@@ -51,7 +53,6 @@
         self.leftUnSelectColor=[UIColor blackColor];
         
         _selectIndex=0;
-        
         _allData=data;
         
         
@@ -114,13 +115,7 @@
          *  滑动到 指定行数
          */
         [self.leftTablew selectRowAtIndexPath:[NSIndexPath indexPathForRow:needToScorllerIndex inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
-        
-        
-        MultilevelTableViewCell * cell=(MultilevelTableViewCell*)[self.leftTablew cellForRowAtIndexPath:[NSIndexPath indexPathForRow:needToScorllerIndex inSection:0]];
-        UILabel * line=(UILabel*)[cell viewWithTag:100];
-        line.backgroundColor=cell.backgroundColor;
-        cell.titile.textColor=self.leftSelectColor;
-        cell.backgroundColor=self.leftSelectBgColor;
+
         _selectIndex=needToScorllerIndex;
         
         [self.rightCollection reloadData];
@@ -150,6 +145,24 @@
     [self.rightCollection reloadData];
     
 }
+-(void)setLeftTablewCellSelected:(BOOL)selected withCell:(MultilevelTableViewCell*)cell
+{
+    UILabel * line=(UILabel*)[cell viewWithTag:kCellRightLineTag];
+    if (selected) {
+        
+        line.backgroundColor=cell.backgroundColor;
+        cell.titile.textColor=self.leftSelectColor;
+        cell.backgroundColor=self.leftSelectBgColor;
+    }
+    else{
+        cell.titile.textColor=self.leftUnSelectColor;
+        cell.backgroundColor=self.leftUnSelectBgColor;
+        line.backgroundColor=_leftTablew.separatorColor;
+    }
+   
+
+}
+
 #pragma mark---左边的tablew 代理
 #pragma mark--deleagte
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -176,7 +189,7 @@
         UILabel * label=[[UILabel alloc] initWithFrame:CGRectMake(kLeftWidth-0.5, 0, 0.5, 44)];
         label.backgroundColor=tableView.separatorColor;
         [cell addSubview:label];
-        label.tag=100;
+        label.tag=kCellRightLineTag;
     }
     
     
@@ -185,17 +198,13 @@
     
     cell.titile.text=title.meunName;
     
-    UILabel * line=(UILabel*)[cell viewWithTag:100];
     
     if (indexPath.row==self.selectIndex) {
-        cell.titile.textColor=self.leftSelectColor;
-        cell.backgroundColor=self.leftSelectBgColor;
-        line.backgroundColor=cell.backgroundColor;
+        [self setLeftTablewCellSelected:YES withCell:cell];
     }
     else{
-        cell.titile.textColor=self.leftUnSelectColor;
-        cell.backgroundColor=self.leftUnSelectBgColor;
-        line.backgroundColor=tableView.separatorColor;
+        [self setLeftTablewCellSelected:NO withCell:cell];
+
 
     }
     
@@ -220,15 +229,11 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     MultilevelTableViewCell * cell=(MultilevelTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
-    cell.titile.textColor=self.leftSelectColor;
-    cell.backgroundColor=self.leftSelectBgColor;
+   
+    [self setLeftTablewCellSelected:YES withCell:cell];
+
     _selectIndex=indexPath.row;
     rightMeun * title=self.allData[indexPath.row];
-
-    
-    UILabel * line=(UILabel*)[cell viewWithTag:100];
-    line.backgroundColor=cell.backgroundColor;
-
     
     [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
     
@@ -239,11 +244,11 @@
 
     
     if (self.isRecordLastScroll) {
-        [self.rightCollection scrollRectToVisible:CGRectMake(0, title.offsetScorller, self.rightCollection.frame.size.width, self.rightCollection.frame.size.height) animated:NO];
+        [self.rightCollection scrollRectToVisible:CGRectMake(0, title.offsetScorller, self.rightCollection.frame.size.width, self.rightCollection.frame.size.height) animated:self.isRecordLastScrollAnimated];
     }
     else{
         
-         [self.rightCollection scrollRectToVisible:CGRectMake(0, 0, self.rightCollection.frame.size.width, self.rightCollection.frame.size.height) animated:NO];
+         [self.rightCollection scrollRectToVisible:CGRectMake(0, 0, self.rightCollection.frame.size.width, self.rightCollection.frame.size.height) animated:self.isRecordLastScrollAnimated];
     }
     
 
