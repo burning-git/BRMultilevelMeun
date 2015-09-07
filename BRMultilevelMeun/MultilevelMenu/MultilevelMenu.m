@@ -39,7 +39,7 @@
 -(instancetype)initWithFrame:(CGRect)frame WithData:(NSArray *)data withSelectIndex:(void (^)(NSInteger, NSInteger, id))selectIndex
 {
     self=[super initWithFrame:frame];
-    if (!self) {
+    if (self) {
         if (data.count==0) {
             return nil;
         }
