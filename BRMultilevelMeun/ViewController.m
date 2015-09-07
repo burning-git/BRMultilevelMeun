@@ -27,7 +27,7 @@
     /**
      *  构建需要数据 2层或者3层数据 (ps 2层也当作3层来处理)
      */
-    NSInteger countMax=20;
+    NSInteger countMax=6;
     for (int i=0; i<countMax; i++) {
         
         rightMeun * meun=[[rightMeun alloc] init];
@@ -79,7 +79,7 @@
     }];
     
     
-    view.needToScorllerIndex=6;
+    view.needToScorllerIndex=0;
 
     view.isRecordLastScroll=YES;
     [self.view addSubview:view];

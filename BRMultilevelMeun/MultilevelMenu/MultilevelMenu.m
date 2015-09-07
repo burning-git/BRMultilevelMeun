@@ -109,8 +109,7 @@
 }
 
 -(void)setNeedToScorllerIndex:(NSInteger)needToScorllerIndex{
-    if (needToScorllerIndex>0) {
-        
+    
         /**
          *  滑动到 指定行数
          */
@@ -120,7 +119,6 @@
         
         [self.rightCollection reloadData];
 
-    }
     _needToScorllerIndex=needToScorllerIndex;
 }
 -(void)setLeftBgColor:(UIColor *)leftBgColor{
@@ -200,11 +198,13 @@
     
     
     if (indexPath.row==self.selectIndex) {
+        NSLog(@"设置 点中");
         [self setLeftTablewCellSelected:YES withCell:cell];
     }
     else{
         [self setLeftTablewCellSelected:NO withCell:cell];
 
+        NSLog(@"设置 不点中");
 
     }
     
@@ -230,9 +230,13 @@
     
     MultilevelTableViewCell * cell=(MultilevelTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
    
+//    MultilevelTableViewCell * BeforeCell=(MultilevelTableViewCell*)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathWithIndex:_selectIndex]];
+//
+//    [self setLeftTablewCellSelected:NO withCell:BeforeCell];
+    _selectIndex=indexPath.row;
+    
     [self setLeftTablewCellSelected:YES withCell:cell];
 
-    _selectIndex=indexPath.row;
     rightMeun * title=self.allData[indexPath.row];
     
     [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
@@ -257,9 +261,11 @@
 
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
     MultilevelTableViewCell * cell=(MultilevelTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
-    cell.titile.textColor=self.leftUnSelectColor;
-    UILabel * line=(UILabel*)[cell viewWithTag:100];
-    line.backgroundColor=tableView.separatorColor;
+//    cell.titile.textColor=self.leftUnSelectColor;
+//    UILabel * line=(UILabel*)[cell viewWithTag:100];
+//    line.backgroundColor=tableView.separatorColor;
+
+    [self setLeftTablewCellSelected:NO withCell:cell];
 
     cell.backgroundColor=self.leftUnSelectBgColor;
 }
